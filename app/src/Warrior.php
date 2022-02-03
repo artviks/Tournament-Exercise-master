@@ -27,8 +27,6 @@ class Warrior
             $warrior->defend($this->attack($tick), $this->equipment()->weapon());
             $this->defend($warrior->attack($tick), $warrior->equipment()->weapon());
             $tick++;
-            var_dump($warrior->hitPoints());
-            var_dump($this->hitPoints);
         }
     }
 
