@@ -1,1 +1,1 @@
-A coll task finished in my implementation
+A coll task finished with my implementation
