@@ -8,7 +8,7 @@ use Tournament\Warrior;
 
 class Highlander extends Warrior
 {
-    protected int $maxHitPoints = 150;
+    protected int $baseHitPoints = 150;
     protected int $hitPoints = 150;
 
     public function __construct(string $ability = null)

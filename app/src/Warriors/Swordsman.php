@@ -7,7 +7,7 @@ use Tournament\Warrior;
 
 class Swordsman extends Warrior
 {
-    protected int $maxHitPoints = 100;
+    protected int $baseHitPoints = 100;
     protected int $hitPoints = 100;
 
     public function __construct(string $ability = null)

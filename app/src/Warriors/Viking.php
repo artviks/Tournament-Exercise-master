@@ -7,7 +7,7 @@ use Tournament\Warrior;
 
 class Viking extends Warrior
 {
-    protected int $maxHitPoints = 120;
+    protected int $baseHitPoints = 120;
     protected int $hitPoints = 120;
 
     public function __construct(string $ability = null)

@@ -9,7 +9,12 @@ use Tournament\FightResources\Attack;
 
 class Warrior
 {
-    protected int $maxHitPoints;
+    private const VETERAN_HP = 0.3; // 30% of baseHP
+    private const VETERAN_ATTACK_UPGRADE = 1; // + 100% of current attack
+    private const VICIOUS_ENDS = 3; // tick
+    private const VICIOUS_ATTACK_UPGRADE = 20;
+
+    protected int $baseHitPoints;
     protected int $hitPoints;
     protected EquipmentCollection $equipment;
     private ?string $ability;
@@ -61,15 +66,7 @@ class Warrior
         $attack = new Attack();
         $attack->setDamage($this->equipment);
 
-        if ($tick < 3 && $this->ability === "Vicious")
-        {
-            $attack->addDamage(20);
-        }
-
-        if ($this->ability === "Veteran" && $this->hitPoints / $this->maxHitPoints  < 0.3)
-        {
-            $attack->addDamage($attack->getDamage());
-        }
+        $this->useAbility($attack, $tick);
 
         return $attack;
     }
@@ -90,5 +87,18 @@ class Warrior
     public function equipment(): EquipmentCollection
     {
         return $this->equipment;
+    }
+
+    private function useAbility(Attack $attack, int $tick): void
+    {
+        if ($tick < self::VICIOUS_ENDS && $this->ability === "Vicious")
+        {
+            $attack->addDamage(self::VICIOUS_ATTACK_UPGRADE);
+        }
+
+        if ($this->ability === "Veteran" && $this->hitPoints / $this->baseHitPoints  < self::VETERAN_HP)
+        {
+            $attack->addDamage($attack->getDamage() * self::VETERAN_ATTACK_UPGRADE);
+        }
     }
 }
